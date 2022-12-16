@@ -2,7 +2,7 @@
 """
 Created on Wed Nov 30 15:22:22 2022
 
-@author: HP
+@author: Abdalmajeed Radwan
 """
 import time
 import pandas as pd
@@ -15,7 +15,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
-    
+
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -34,8 +34,9 @@ def get_filters():
        
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
-        month = input("Which month ?").lower()       
+        month = input("Which month ?").lower()
         try:
+            #checks if the input is valid for the available months
             #if month == "january" or month == "february" or month == "march" or month =="april" or month =="may" or month =="june" or month =="july" or month == "august " or month == "september" or month == "october" or month == "november" or month == "december" or month == "all":
             if month == "january" or month == "february" or month == "march" or month =="april" or month =="may" or month =="june" or month == "all":
                 break
@@ -107,16 +108,16 @@ def time_stats(df):
     df['month'] =df['Start Time'].dt.month
     common_month = df['month'].mode()[0]
     print("most common month is :",common_month)
-    
+
     # TO DO: display the most common day of week
     #df['day'] =df['Start Time'].dt.day
     #common_day = df['day'].mode()[0]
     #print("most common day is :",common_day)
-    
+
     df['day'] =df['Start Time'].dt.day_name()
     common_day = df['day'].mode()[0]
     print("most common day is :",common_day)
-    
+
     # TO DO: display the most common start hour
     df['hour'] =df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
@@ -135,7 +136,7 @@ def station_stats(df):
     # TO DO: display most commonly used start station
     common_start_station = df['Start Station'].mode()[0]
     print("most common start station is",common_start_station)
-    
+
     # TO DO: display most commonly used end station
     common_end_station = df['End Station'].mode()[0]
     print("most common end station is",common_end_station)
@@ -145,7 +146,7 @@ def station_stats(df):
     common_combination = station_combination.size().sort_values(ascending = False).head(1)
     print("most common station combination is",common_combination)
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -155,11 +156,11 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
     print("total travel time is ",total_travel_time)
-    
+
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
     print("average travel time is ",mean_travel_time)
@@ -172,7 +173,7 @@ def show_sample(df):
     row_end = 5
     answer = input("do you want to see a sample of the data (yes or no) ?").lower()
 
-    while True :    
+    while True :
         if answer == "yes":
             print(df[row_start:row_end])
             row_start = row_end
@@ -181,19 +182,19 @@ def show_sample(df):
 
         elif answer == "no":
             break
-        
+
 
 def user_stats(df,city):
     """Displays statistics on bikeshare users."""
-    
-    
+
+
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
     # TO DO: Display counts of user types
     user_types_counts = df['User Type'].value_counts()
     print("The count of user types is \n",user_types_counts)
-    
+
     if city != 'washington':
 
     # TO DO: Display counts of gender
@@ -210,7 +211,7 @@ def user_stats(df,city):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 
 def main():
     while True:
@@ -222,7 +223,7 @@ def main():
         trip_duration_stats(df)
         user_stats(df,city)
         show_sample(df)
-        
+
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
@@ -231,4 +232,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
