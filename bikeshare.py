@@ -31,7 +31,7 @@ def get_filters():
         except  :
             print("invalid input, try agian")
 
-       
+
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
         month = input("Which month ?").lower()
@@ -168,6 +168,7 @@ def trip_duration_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
+
 def show_sample(df):
     row_start = 0
     row_end = 5
@@ -205,6 +206,7 @@ def user_stats(df,city):
         earliest_birth = df['Birth Year'].min()
         recent_birth = df['Birth Year'].max()
         common_birth = df['Birth Year'].mode()[0]
+        
         print("earliest birth is ",earliest_birth)
         print("recent birth is ",recent_birth)
         print("most common birth",common_birth)
